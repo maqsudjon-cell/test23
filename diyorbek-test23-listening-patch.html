@@ -1,0 +1,20 @@
+<div class="header-actions">
+      <span class="progress-pill"><span id="progressCount">0</span>/40</span>
+      <button class="btn btn-ghost" onclick="eraseHighlights()">Clear Highlights</button>
+      <button class="btn btn-ghost" onclick="resetAllAnswers()">↻ Reset</button>
+      <button class="btn btn-ghost" onclick="changeMode()">↺ Mode</button>
+      <button class="btn btn-primary" onclick="submitAnswers()">✓ Submit</button>
+    </div>
+
+---
+
+function switchPart(n) {
+  document.querySelectorAll('.part-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.part-tab[data-part="${n}"]`).classList.add('active');
+  document.querySelectorAll('.part-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('part-'+n).classList.add('active');
+  if (currentMode !== 'simulation') loadTrackForPart(n);
+  const sw = document.getElementById('submitWrap');
+  if (sw) sw.style.display = n === 4 ? 'block' : 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
